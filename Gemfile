@@ -3,15 +3,20 @@
  # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
  gem 'rails', '4.2.5'
  
- # #1
+ # production database
  group :production do
    gem 'pg'
    gem 'rails_12factor'
  end
  
- # #2
+ # develement database.
  group :development do
    gem 'sqlite3'
+ end
+ 
+ # rspec for testing.
+ group :development, :test do
+   gem 'rspec-rails', '~> 3.0'
  end
  
  # Use SCSS for stylesheets
