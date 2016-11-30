@@ -4,3 +4,4 @@
  
  "lsof -i :$PORT" find port number
  "kill -9 PID" kill off server
+ "rails s -p $PORT -b $IP" to start the server
