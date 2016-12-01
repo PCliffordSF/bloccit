@@ -11,6 +11,7 @@
  
  # develement database.
  group :development do
+   gem 'pry-rails'
    gem 'sqlite3'
  end
  
