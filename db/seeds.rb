@@ -30,6 +30,14 @@
    )
  end
  
+ puts Post.count
+ Post.find_or_create_by(title: "Assignment 17 Title", body: "Assignment 17 Body")
+ puts Post.count
+ 
+ puts Comment.count
+ Comment.find_or_create_by(post: posts.find(151) , body: "Assignment 17 Comment Body")
+ puts Comment.count
+ 
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
