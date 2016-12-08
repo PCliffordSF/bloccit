@@ -25,6 +25,7 @@ RSpec.describe PostsController, type: :controller do
        get :show, {id: my_post.id}
        expect(response).to have_http_status(:success)
      end
+     
      it "renders the #show view" do
 
        get :show, {id: my_post.id}
@@ -45,18 +46,18 @@ RSpec.describe PostsController, type: :controller do
         expect(response).to have_http_status(:success)
       end
  
- # #2
       it "renders the #new view" do
         get :new
         expect(response).to render_template :new
       end
  
- # #3
       it "instantiates @post" do
         get :new
         expect(assigns(:post)).not_to be_nil
       end
     end
+    
+    
  
     describe "POST create" do
  # #4
@@ -89,13 +90,10 @@ RSpec.describe PostsController, type: :controller do
      it "renders the #edit view" do
        get :edit, {id: my_post.id}
 
-
        expect(response).to render_template :edit
      end
  
-
-
-     it "assigns post to be updated to @post" do
+     it "assigns question to be updated to @question" do
        get :edit, {id: my_post.id}
  
        post_instance = assigns(:post)
@@ -106,7 +104,11 @@ RSpec.describe PostsController, type: :controller do
      end
    end
    
-      describe "PUT update" do
+   
+   
+   
+   
+    describe "PUT update" do
      it "updates post with expected attributes" do
        new_title = RandomData.random_sentence
        new_body = RandomData.random_paragraph
@@ -132,7 +134,7 @@ RSpec.describe PostsController, type: :controller do
    
    
    
-      describe "DELETE destroy" do
+    describe "DELETE destroy" do
      it "deletes the post" do
        delete :destroy, {id: my_post.id}
 
@@ -144,7 +146,7 @@ RSpec.describe PostsController, type: :controller do
        delete :destroy, {id: my_post.id}
 
        expect(response).to redirect_to posts_path
-     end
+    end
    end
 
 end
