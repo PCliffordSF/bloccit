@@ -11,38 +11,40 @@
  
  
  # Create Topics
-  15.times do
-   Topic.create!(
-     name:         RandomData.random_sentence,
-     description:  RandomData.random_paragraph,
-     public: true
-   )
- end
+ #  15.times do
+ #   Topic.create!(
+ #     name:         RandomData.random_sentence,
+ #     description:  RandomData.random_paragraph,
+ #     public: true
+ #   )
+ # end
  topics = Topic.all
 
- # Create Posts
- 50.times do
+
+ # Create SponsoredPost
+ 15.times do
  # #1
-   Post.create!(
+   SponsoredPost.create!(
  # #2
      topic:  topics.sample,
-     title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph
+     title:  RandomData.random_word,
+     body:   RandomData.random_paragraph,
+     price:  RandomData.random_price
    )
  end
- posts = Post.all
  
  # Create Comments
  # #3
- 100.times do
-   Comment.create!(
- # #4
-     post: posts.sample,
-     body: RandomData.random_paragraph
-   )
- end
+ # 100.times do
+ #   Comment.create!(
+ # # #4
+ #     post: posts.sample,
+ #     body: RandomData.random_paragraph
+ #   )
+ # end
  
  puts "Seed finished"
  puts "#{Topic.count} topics created"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ puts "#{SponsoredPost.count} comments created"
