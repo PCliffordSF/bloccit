@@ -1,2 +1,25 @@
-<h1>SponsoredPosts#edit</h1>
-<p>Find me in app/views/sponsored_posts/edit.html.erb</p>
+ <h1>Edit Sponsored Post</h1>
+ 
+ <div class="row">
+   <div class="col-md-4">
+   <div class="col-md-8">
+     <%= form_for [@sponsored_post.topic, @sponsored_post] do |sp| %>
+       <div class="form-group">
+         <%= sp.label :title %>
+         <%= sp.text_field :title, class: 'form-control', placeholder: "Edit sponsored post title" %>
+       </div>
+       <div class="form-group">
+         <%= sp.label :body %>
+         <%= sp.text_area :body, rows: 8, class: 'form-control', placeholder: "Edit sponsored post body" %>
+       </div>
+       
+       <div class="form-group">
+         <%= sp.label :price %>
+         <%= sp.number_field :price, class: 'form-control', placeholder: "Edit sponsored post price" %>
+       </div>
+       <div class="form-group">
+         <%= sp.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>
