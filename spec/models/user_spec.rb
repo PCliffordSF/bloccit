@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-          let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
+  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
    # Shoulda tests for name
    it { is_expected.to validate_presence_of(:name) }
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
+  
+  
  
    # Shoulda tests for email
    it { is_expected.to validate_presence_of(:email) }
@@ -21,9 +23,14 @@ RSpec.describe User, type: :model do
      it "should have name and email attributes" do
        expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
      end
+     it "should capitalize the name of the user" do
+        user.name = "lower case"
+        user.save
+        expect(user.name).to eq "Lower Case"
+     end
    end
    
-      describe "invalid user" do
+   describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
      let(:user_with_invalid_email) { User.new(name: "Bloccit User", email: "") }
  
