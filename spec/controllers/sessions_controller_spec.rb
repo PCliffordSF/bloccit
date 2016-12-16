@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe SessionsController, type: :controller do
     
    let(:my_user) { User.create!(name: "Blochead", email: "blochead@bloc.io", password: "password") }
@@ -59,5 +60,15 @@ RSpec.describe SessionsController, type: :controller do
        expect(flash[:notice]).to be_present
      end
    end
+   
+   
+   let(:me) { User.find_by! email: "paulclifford2570@gmail.com"  }
+ 
+   describe "describe GET avatar_url" do
+     it "returns http success" do
+       link_to avatar_url(:me) 
+       expect(response).to have_http_status(:success)
+     end
+ end
 
 end
