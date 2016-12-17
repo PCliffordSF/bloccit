@@ -62,13 +62,4 @@ RSpec.describe SessionsController, type: :controller do
    end
    
    
-   let(:me) { User.find_by! email: "paulclifford2570@gmail.com"  }
- 
-   describe "describe GET avatar_url" do
-     it "returns http success" do
-       link_to avatar_url(:me) 
-       expect(response).to have_http_status(:success)
-     end
- end
-
 end
