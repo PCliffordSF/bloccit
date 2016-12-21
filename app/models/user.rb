@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
    has_secure_password
    
    
-   enum role: [:member, :admin] #this turns the integer column into an enum
+   enum role: [:member, :admin, :moderator] #this turns the integer column into an enum
     
 end
