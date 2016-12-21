@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     
-    before_action :require_sign_in, except: :show ## filters out guests
+    before_action :require_sign_in, except: :show ## filters out guests,
     
     before_action :authorize_user, except: [:show, :new, :create] ## filters out non owner members
     
