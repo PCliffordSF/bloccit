@@ -1,5 +1,4 @@
 class FavoriteMailer < ApplicationMailer
-    
     default from: "paulclifford2570@gmail.com"
     
    def new_comment(user, post, comment)
@@ -12,7 +11,6 @@ class FavoriteMailer < ApplicationMailer
      @post = post
      @comment = comment
  
-
      mail(to: user.email, subject: "New comment on #{post.title}")
    end
     
