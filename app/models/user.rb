@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
    has_many :posts, dependent: :destroy
    has_many :comments, dependent: :destroy
    has_many :votes, dependent: :destroy
+   has_many :favorites, dependent: :destroy
     
    before_save { self.email = email.downcase if email.present? }
    before_save { self.role ||= :member }
@@ -20,5 +21,9 @@ class User < ActiveRecord::Base
    
    
    enum role: [:member, :admin] #this turns the integer column into an enum
+   
+   def favorite_for(post)
+     favorites.where(post_id: post.id).first
+   end
     
 end

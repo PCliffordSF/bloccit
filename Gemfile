@@ -34,4 +34,6 @@
  gem 'bootstrap-sass'
  # Used for encrypting User passwords
  gem 'bcrypt'
+ # Used for storing API keys
+ gem 'figaro', '1.0'
 
