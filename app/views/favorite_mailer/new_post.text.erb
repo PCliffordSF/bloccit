@@ -1,7 +1,7 @@
- Your have created the following post "<%= @post.title %>"
+ You have created the following post "<%= @post.title %>"
  <%= "=" * (@post.title.length + 12) %>
+ 
 
  
  <%= @post.body %>
  
- Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>

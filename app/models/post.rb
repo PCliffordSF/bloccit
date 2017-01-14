@@ -38,8 +38,9 @@ class Post < ActiveRecord::Base
    private
  
    def create_favorite
-       @post = post
-       user.favorites.where(post: @post).create
+       post = @post
+       user = @user
+       favorite = user.favorites.where(post: @post).create
        FavoriteMailer.new_post(favorite.user, post, self).deliver_now
 
    end

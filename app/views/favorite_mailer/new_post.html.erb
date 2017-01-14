@@ -4,7 +4,7 @@
      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
    </head>
    <body>
-     <h1>You have added the following new post "<%= @post.title %>"</h1>
+     <h1><%= @comment.user.name %> has created the following post "<%= @post.title %>"</h1>
      <p>
        <%= @post.body %>
      </p>
