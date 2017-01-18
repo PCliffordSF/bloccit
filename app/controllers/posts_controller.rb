@@ -2,6 +2,9 @@ class PostsController < ApplicationController
     
     before_action :require_sign_in, except: :show
     before_action :authorize_user, except: [:show, :new, :create]
+    
+    # I am not constrained to only use befor_action
+    # also add restriction to back up view. Still restrict in 
 
   def show
     @post = Post.find(params[:id])
