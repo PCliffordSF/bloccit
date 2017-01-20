@@ -11,6 +11,7 @@
          </div>
        <% end %>
        <div class="media-body">
+          <h2 class="media-heading">{user.name} has not submitted any posts yet.</h2>
          <h2 class="media-heading"><%= @user.name %></h2>
          <small>
            <%= pluralize(@user.posts.count, 'post') %>,
@@ -24,6 +25,9 @@
 
  <h2>Posts</h2>
  <%= render @user.posts %>
- 
+
+ <h2>Favortited Post</h2>
+ <%= render @user.favorites %>
+
  <h2>Comments</h2>
  <%= render @user.comments %>
