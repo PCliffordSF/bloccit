@@ -38,8 +38,7 @@ class PostsController < ApplicationController
       redirect_to [@post.topic, @post]
       
     else
-      render :edit  
-        
+      render :edit
     end
       
   end
