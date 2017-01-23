@@ -1,10 +1,6 @@
 class TopicsController < ApplicationController
  
-   before_action :require_sign_in, except: [:index, :show] ## filters out guests
-
-   before_action :authorize_user, except: [:index, :show] ## filters out members
-   
-   
+   before_action :require_sign_in, except: [:index, :show]
     
    def index
      @topics = Topic.all
@@ -17,7 +13,8 @@ class TopicsController < ApplicationController
    
     
    def new
-    if current_user.moderator?
+    if current_user.member? || current_user.moderator?
+     flash[:alert] = "You must be an admin to do that."
      redirect_to topics_path
     else
      @topic = Topic.new
@@ -25,7 +22,8 @@ class TopicsController < ApplicationController
    end 
    
    def create
-    if current_user.moderator?
+    if current_user.member? || current_user.moderator?
+     flash[:alert] = "You must be an admin to do that."
      redirect_to topics_path
     else
     @topic = Topic.new(topic_params)
@@ -41,12 +39,20 @@ class TopicsController < ApplicationController
    
     
    def edit
+    if current_user.member?
+     flash[:alert] = "You must be an admin or moderator to do that."
+     redirect_to topics_path
+    else
      @topic = Topic.find(params[:id])
+    end
    end
    
     
    def update
-    
+    if current_user.member?
+     flash[:alert] = "You must be an admin or moderator to do that."
+     redirect_to topics_path
+    else
      @topic = Topic.find(params[:id])
  
      @topic.assign_attributes(topic_params)
@@ -58,9 +64,14 @@ class TopicsController < ApplicationController
        flash.now[:alert] = "Error saving topic. Please try again."
        render :edit
      end
+    end
    end
    
    def destroy
+    if current_user.member? || current_user.moderator?
+     flash[:alert] = "You must be an admin to do that."
+     redirect_to topics_path
+    else
      @topic = Topic.find(params[:id])
  
      if @topic.destroy
@@ -70,6 +81,7 @@ class TopicsController < ApplicationController
        flash.now[:alert] = "There was an error deleting the topic."
        render :show
      end
+    end
    end
  
    private
@@ -77,20 +89,5 @@ class TopicsController < ApplicationController
    def topic_params
      params.require(:topic).permit(:name, :description, :public)
    end
-   
-   def authorize_user
-     unless current_user.admin? || current_user.moderator?
-       flash[:alert] = "You must be an admin to do that."
-       redirect_to topics_path
-     end
-   end
-   
-   def authorize_admin
-     unless current_user.admin?
-       flash[:alert] = "You must be an admin to do that."
-       redirect_to topics_path
-     end
-   end
- 
    
 end

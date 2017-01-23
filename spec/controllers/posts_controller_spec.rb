@@ -146,6 +146,9 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+  
+  
+  ######################################################
 
 
   context "member user doing CRUD on a post they own" do
@@ -370,6 +373,9 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+  
+  
+  #########################################################
 
 
   context "moderator user doing CRUD on a post they own" do

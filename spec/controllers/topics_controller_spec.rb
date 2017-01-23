@@ -73,6 +73,9 @@ RSpec.describe TopicsController, type: :controller do
       end
     end
   end
+  
+  
+  ###############################################################
 
   context "member user" do
     before do
@@ -147,6 +150,10 @@ RSpec.describe TopicsController, type: :controller do
       end
     end
   end
+  
+  
+  
+  #################################################################
   
   context "moderator user" do
     before do

@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     
     before_action :require_sign_in, except: :show ## filters out guests,
     
-    before_action :authorize_user, except: [:show, :new, :create] ## filters out non owner members
+#    before_action :authorize_user, except: [:show, :new] ## filters out non owner members
     
 
   def show
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
   
   def create
-
+      
      @topic = Topic.find(params[:topic_id])
      @post = @topic.posts.build(post_params)
      @post.user = current_user
@@ -33,12 +33,26 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    unless current_user == @post.user || current_user.admin? || current_user.moderator?
+      flash[:alert] = "You must be an admin or moderator to do that."
+      redirect_to [@post.topic, @post]
+      
+    else
+      render :edit  
+        
+    end
+      
   end
   
   def update
-     @post = Post.find(params[:id])
-     @post.assign_attributes(post_params)
- 
+    @post = Post.find(params[:id])
+    @post.assign_attributes(post_params)
+    
+    unless current_user == @post.user || current_user.admin? || current_user.moderator?
+      flash[:alert] = "You must be an admin or moderator to do that."
+      redirect_to [@post.topic, @post]
+    else
+        
      if @post.save
        flash[:notice] = "Post was updated."
        redirect_to [@post.topic, @post]
@@ -47,11 +61,18 @@ class PostsController < ApplicationController
        render :edit
      end
      
+    end
+     
   end
   
   def destroy
-     @post = Post.find(params[:id])
- 
+    @post = Post.find(params[:id])
+    
+    unless current_user == @post.user || current_user.admin?
+       flash[:alert] = "You must be an admin to do that."
+       redirect_to [@post.topic, @post]
+    else
+    
      if @post.destroy
        flash[:notice] = "\"#{@post.title}\" was deleted successfully."
        redirect_to @post.topic
@@ -59,6 +80,8 @@ class PostsController < ApplicationController
        flash.now[:alert] = "There was an error deleting the post."
        render :show
      end
+     
+    end
   end
   
    private
@@ -67,13 +90,13 @@ class PostsController < ApplicationController
      params.require(:post).permit(:title, :body)
    end
    
-   def authorize_user
-     post = Post.find(params[:id])
+#   def authorize_user
+#      post = Post.find(params[:id])
 
-     unless current_user == post.user || current_user.admin? || current_user.moderator?
-       flash[:alert] = "You must be an admin to do that."
-       redirect_to [post.topic, post]
-     end
-   end
+#      unless current_user == post.user || current_user.admin?
+#       flash[:alert] = "You must be an admin to do that."
+#       redirect_to [post.topic, post]
+#      end
+#   end
   
 end
