@@ -69,6 +69,9 @@ RSpec.describe User, type: :model do
 
  
       context "moderator user" do
+       before do
+         user.moderator!
+       end
           
        it "returns true for #moderator?" do
          expect(user.moderator?).to be_truthy  ##
