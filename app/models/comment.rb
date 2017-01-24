@@ -15,5 +15,9 @@ class Comment < ActiveRecord::Base
        FavoriteMailer.new_comment(favorite.user, post, self).deliver_now
      end
    end
+   
+   def has_comment?
+     # comment method here
+   end
 
 end
