@@ -31,8 +31,8 @@
  <h2>Posts</h2>
  <%= render @user.posts %>
 
- <h2>Favortited Post</h2>
- <%= render @user.favorites %>
+ <h2>Favorited Posts</h2>
+ <%= render partial: 'favorites/favorite', locals: { post: @post } %>
 
  <% if !has_no_comments? %>
  <h2>Comments</h2>
