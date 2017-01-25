@@ -32,9 +32,10 @@ class User < ActiveRecord::Base
      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
    end
    
-   def has_posts?
-      user.posts.count > 0
-   end
+#   def has_no_posts?
+#      user = current_user
+#      user.posts.count == 0
+#   end
    
     
 end

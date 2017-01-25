@@ -10,26 +10,35 @@
            <%= image_tag avatar_url, class: 'media-object' %>
          </div>
        <% end %>
-       <% if has_posts? %>
        <div class="media-body">
-          <h2 class="media-heading">{user.name} has not submitted any posts yet.</h2>
-         <h2 class="media-heading"><%= @user.name %></h2>
-         <small>
+       <% if has_no_posts? %>
+          <h2 class="media-heading"><%= @user.name %> has not submitted any posts yet.</h2>
+
+       <% else %>
+        <h2 class="media-heading">Welcome <%= @user.name %>.</h2>
+        <small>
            <%= pluralize(@user.posts.count, 'post') %>,
            <%= pluralize(@user.comments.count, 'comment') %>
-         </small>
-       </div>
+       </small>
        <% end %>
+       </div>
      </div>
    </div>
  </div>
  
-
+ <% if !has_no_posts? %>
+ 
  <h2>Posts</h2>
  <%= render @user.posts %>
 
  <h2>Favortited Post</h2>
  <%= render @user.favorites %>
 
+ <% if !has_no_comments? %>
  <h2>Comments</h2>
  <%= render @user.comments %>
+ <% else %>
+ <h2 class="media-heading"><%= @user.name %> has not commented on any posts yet.</h2>
+ <% end %>
+ 
+ <% end %>
