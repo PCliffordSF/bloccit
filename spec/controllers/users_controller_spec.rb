@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-   let(:new_user_attributes) do
+    
+
+   let(:my_user) { create(:user) }
+   
+  let(:new_user_attributes) do
      {
          name: "BlocHead",
          email: "blochead@bloc.io",
          password: "blochead",
          password_confirmation: "blochead"
      }
-   end
+  end
    
    describe "GET new" do
      it "returns http success" do
@@ -21,6 +25,23 @@ RSpec.describe UsersController, type: :controller do
        expect(assigns(:user)).to_not be_nil
      end
    end
+   
+    describe "GET show" do
+      it "returns http success" do
+        get :show, id: my_user.id
+        expect(response).to have_http_status(:success)
+      end
+
+      it "renders the #show view" do
+        get :show,  id: my_user.id
+        expect(response).to render_template :show
+      end
+
+      it "assigns my_user to @user" do
+        get :show, id: my_user.id
+        expect(assigns(:user)).to eq(my_user)
+      end
+    end
    
 
    describe "POST create" do
